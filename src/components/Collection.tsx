@@ -1,55 +1,5 @@
 import ProductCard from "./ProductCard";
-import goldenElysia from "@/assets/golden-elysia.jpeg";
-import wildHorizon from "@/assets/wild-horizon.jpeg";
-import rebelRose from "@/assets/rebel-rose.jpeg";
-import aureliaLuxe from "@/assets/aurelia-luxe.jpeg";
-import victoryNoir from "@/assets/victory-noir.jpeg";
-import midnightEmber from "@/assets/midnight-ember.jpeg";
-import oudEclipse from "@/assets/oud-eclipse.jpeg";
-import duneImperial from "@/assets/dune-imperial.jpeg";
-
-const products = [
-  {
-    image: goldenElysia,
-    name: "Golden Elysia",
-    description: "Radiant floral elegance",
-  },
-  {
-    image: rebelRose,
-    name: "Rebel Rose",
-    description: "Bold and enchanting",
-  },
-  {
-    image: victoryNoir,
-    name: "Victory Noir",
-    description: "Sophisticated darkness",
-  },
-  {
-    image: oudEclipse,
-    name: "Oud Eclipse",
-    description: "Mysterious oriental",
-  },
-  {
-    image: midnightEmber,
-    name: "Midnight Ember",
-    description: "Warm smoky allure",
-  },
-  {
-    image: aureliaLuxe,
-    name: "Aurelia Luxe",
-    description: "Opulent golden warmth",
-  },
-  {
-    image: wildHorizon,
-    name: "Wild Horizon",
-    description: "Adventurous spirit",
-  },
-  {
-    image: duneImperial,
-    name: "Dune Impérial",
-    description: "Desert majesty",
-  },
-];
+import { products } from "@/data/products";
 
 const Collection = () => {
   return (
@@ -74,7 +24,8 @@ const Collection = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-10">
           {products.map((product, index) => (
             <ProductCard
-              key={product.name}
+              key={product.id}
+              id={product.id}
               image={product.image}
               name={product.name}
               description={product.description}
