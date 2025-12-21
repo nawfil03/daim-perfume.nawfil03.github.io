@@ -1,14 +1,18 @@
+import { Link } from "react-router-dom";
+
 interface ProductCardProps {
+  id: string;
   image: string;
   name: string;
   description: string;
   index: number;
 }
 
-const ProductCard = ({ image, name, description, index }: ProductCardProps) => {
+const ProductCard = ({ id, image, name, description, index }: ProductCardProps) => {
   return (
-    <div 
-      className="group relative hover-lift"
+    <Link 
+      to={`/product/${id}`}
+      className="group relative hover-lift block"
       style={{ animationDelay: `${index * 0.1}s` }}
     >
       {/* Image Container */}
@@ -20,9 +24,9 @@ const ProductCard = ({ image, name, description, index }: ProductCardProps) => {
         />
         {/* Overlay on Hover */}
         <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-          <button className="px-8 py-3 border border-primary text-primary text-xs tracking-[0.2em] uppercase font-medium hover:bg-primary hover:text-primary-foreground transition-all duration-300">
+          <span className="px-8 py-3 border border-primary text-primary text-xs tracking-[0.2em] uppercase font-medium group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
             Discover
-          </button>
+          </span>
         </div>
       </div>
 
@@ -38,7 +42,7 @@ const ProductCard = ({ image, name, description, index }: ProductCardProps) => {
 
       {/* Golden Line Accent */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-primary group-hover:w-1/2 transition-all duration-500" />
-    </div>
+    </Link>
   );
 };
 
