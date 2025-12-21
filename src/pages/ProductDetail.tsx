@@ -1,15 +1,30 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
-import { ArrowLeft, Droplets, Leaf, FlaskConical } from "lucide-react";
+import { ArrowLeft, Droplets, Leaf, FlaskConical, ShoppingBag, Heart, Minus, Plus, Truck, Shield, RotateCcw } from "lucide-react";
+import { useState } from "react";
+import { toast } from "sonner";
 import { getProductById, products } from "@/data/products";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
   const product = id ? getProductById(id) : undefined;
+  const [quantity, setQuantity] = useState(1);
+  const [isWishlisted, setIsWishlisted] = useState(false);
 
   if (!product) {
     return <Navigate to="/" replace />;
   }
+
+  const handleAddToCart = () => {
+    toast.success(`${quantity}x ${product.name} added to cart`, {
+      description: `Total: ₹${(product.price * quantity).toLocaleString('en-IN')}`,
+    });
+  };
+
+  const handleWishlist = () => {
+    setIsWishlisted(!isWishlisted);
+    toast.success(isWishlisted ? "Removed from wishlist" : "Added to wishlist");
+  };
 
   const topNotes = product.notes.find(n => n.category === "top")?.notes || [];
   const heartNotes = product.notes.find(n => n.category === "heart")?.notes || [];
@@ -79,15 +94,52 @@ const ProductDetail = () => {
                   {product.story}
                 </p>
 
-                <p className="text-xs tracking-[0.2em] uppercase text-primary/70 mb-8">
+                <p className="text-xs tracking-[0.2em] uppercase text-primary/70 mb-6">
                   {product.inspiration}
                 </p>
 
-                <div className="flex items-center gap-6 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-2">
-                    <FlaskConical size={16} className="text-primary" />
-                    {product.size}
-                  </span>
+                {/* Price */}
+                <div className="flex items-baseline gap-4 mb-8">
+                  <span className="font-display text-4xl text-primary">₹{product.price.toLocaleString('en-IN')}</span>
+                  <span className="text-muted-foreground text-sm">{product.size}</span>
+                </div>
+
+                {/* Quantity & Add to Cart */}
+                <div className="space-y-4 mb-8">
+                  <div className="flex items-center gap-4">
+                    <div className="flex items-center border border-border">
+                      <button onClick={() => setQuantity(Math.max(1, quantity - 1))} className="p-3 hover:bg-muted transition-colors">
+                        <Minus size={16} />
+                      </button>
+                      <span className="w-12 text-center font-medium">{quantity}</span>
+                      <button onClick={() => setQuantity(quantity + 1)} className="p-3 hover:bg-muted transition-colors">
+                        <Plus size={16} />
+                      </button>
+                    </div>
+                    <button onClick={handleWishlist} className={`p-3 border transition-colors ${isWishlisted ? 'border-primary bg-primary/10 text-primary' : 'border-border hover:border-primary'}`}>
+                      <Heart size={20} fill={isWishlisted ? "currentColor" : "none"} />
+                    </button>
+                  </div>
+                  <button onClick={handleAddToCart} className="w-full bg-primary text-primary-foreground py-4 flex items-center justify-center gap-3 hover:bg-primary/90 transition-colors">
+                    <ShoppingBag size={20} />
+                    <span className="font-medium tracking-wider">ADD TO BAG - ₹{(product.price * quantity).toLocaleString('en-IN')}</span>
+                  </button>
+                </div>
+
+                {/* Features */}
+                <div className="grid grid-cols-3 gap-4 py-6 border-y border-border">
+                  <div className="text-center space-y-2">
+                    <Truck size={20} className="mx-auto text-primary" />
+                    <p className="text-xs text-muted-foreground">Free Shipping</p>
+                  </div>
+                  <div className="text-center space-y-2">
+                    <Shield size={20} className="mx-auto text-primary" />
+                    <p className="text-xs text-muted-foreground">Authentic</p>
+                  </div>
+                  <div className="text-center space-y-2">
+                    <RotateCcw size={20} className="mx-auto text-primary" />
+                    <p className="text-xs text-muted-foreground">Easy Returns</p>
+                  </div>
                 </div>
               </div>
             </div>

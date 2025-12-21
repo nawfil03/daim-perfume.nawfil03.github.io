@@ -23,6 +23,7 @@ export interface Product {
   ingredients: string[];
   concentration: string;
   size: string;
+  price: number;
 }
 
 export const products: Product[] = [
@@ -40,7 +41,8 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Limonene", "Linalool", "Benzyl Benzoate", "Citral", "Geraniol", "Benzyl Alcohol", "Farnesol"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz"
+    size: "100ml / 3.4 fl oz",
+    price: 999
   },
   {
     id: "rebel-rose",
@@ -56,7 +58,8 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Linalool", "Hydroxycitronellal", "Limonene", "Citronellol", "Geraniol", "Alpha-Isomethyl Ionone"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz"
+    size: "100ml / 3.4 fl oz",
+    price: 999
   },
   {
     id: "victory-noir",
@@ -72,7 +75,8 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Limonene", "Linalool", "Coumarin", "Citral", "Geraniol", "Eugenol", "Citronellol"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz"
+    size: "100ml / 3.4 fl oz",
+    price: 999
   },
   {
     id: "oud-eclipse",
@@ -88,7 +92,8 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Limonene", "Coumarin", "Linalool", "Citronellol", "Geraniol", "Eugenol", "Farnesol"],
     concentration: "Eau de Parfum Intense",
-    size: "100ml / 3.4 fl oz"
+    size: "100ml / 3.4 fl oz",
+    price: 999
   },
   {
     id: "midnight-ember",
@@ -104,7 +109,8 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Linalool", "Limonene", "Coumarin", "Alpha-Isomethyl Ionone", "Citronellol", "Citral"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz"
+    size: "100ml / 3.4 fl oz",
+    price: 999
   },
   {
     id: "aurelia-luxe",
@@ -120,7 +126,8 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Linalool", "Limonene", "Hydroxycitronellal", "Alpha-Isomethyl Ionone", "Geraniol", "Citral"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz"
+    size: "100ml / 3.4 fl oz",
+    price: 999
   },
   {
     id: "wild-horizon",
@@ -136,7 +143,8 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Limonene", "Linalool", "Citronellol", "Coumarin", "Geraniol", "Citral"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz"
+    size: "100ml / 3.4 fl oz",
+    price: 999
   },
   {
     id: "dune-imperial",
@@ -152,7 +160,8 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Coumarin", "Limonene", "Linalool", "Eugenol", "Cinnamal", "Benzyl Benzoate"],
     concentration: "Eau de Parfum Intense",
-    size: "100ml / 3.4 fl oz"
+    size: "100ml / 3.4 fl oz",
+    price: 999
   }
 ];
 

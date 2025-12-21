@@ -1,14 +1,25 @@
 import { Link } from "react-router-dom";
+import { ShoppingBag } from "lucide-react";
+import { toast } from "sonner";
 
 interface ProductCardProps {
   id: string;
   image: string;
   name: string;
   description: string;
+  price: number;
   index: number;
 }
 
-const ProductCard = ({ id, image, name, description, index }: ProductCardProps) => {
+const ProductCard = ({ id, image, name, description, price, index }: ProductCardProps) => {
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    toast.success(`${name} added to cart`, {
+      description: "Continue shopping or proceed to checkout",
+    });
+  };
+
   return (
     <Link 
       to={`/product/${id}`}
@@ -24,9 +35,13 @@ const ProductCard = ({ id, image, name, description, index }: ProductCardProps) 
         />
         {/* Overlay on Hover */}
         <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-          <span className="px-8 py-3 border border-primary text-primary text-xs tracking-[0.2em] uppercase font-medium group-hover:bg-primary group-hover:text-primary-foreground transition-all duration-300">
-            Discover
-          </span>
+          <button
+            onClick={handleAddToCart}
+            className="px-8 py-3 bg-primary text-primary-foreground text-xs tracking-[0.2em] uppercase font-medium flex items-center gap-2 hover:bg-primary/90 transition-colors"
+          >
+            <ShoppingBag size={16} />
+            Add to Bag
+          </button>
         </div>
       </div>
 
@@ -35,9 +50,10 @@ const ProductCard = ({ id, image, name, description, index }: ProductCardProps) 
         <h3 className="font-display text-xl lg:text-2xl text-foreground tracking-wide mb-2">
           {name}
         </h3>
-        <p className="text-sm text-muted-foreground font-light tracking-wide">
+        <p className="text-sm text-muted-foreground font-light tracking-wide mb-2">
           {description}
         </p>
+        <p className="text-lg font-semibold text-primary">₹{price.toLocaleString('en-IN')}</p>
       </div>
 
       {/* Golden Line Accent */}
