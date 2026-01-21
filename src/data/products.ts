@@ -171,30 +171,26 @@ export const getProductById = (id: string): Product | undefined => {
   return products.find(product => product.id === id);
 };
 
-export const openWhatsAppOrder = (productName: string, quantity: number = 1, price: number = 999) => {
+export const getWhatsAppOrderUrl = (
+  productName: string,
+  quantity: number = 1,
+  price: number = 999
+) => {
   const total = price * quantity;
   const message = encodeURIComponent(
     `Hi! I would like to order from DAIM Perfumes:\n\n` +
-    `Product: ${productName}\n` +
-    `Quantity: ${quantity}\n` +
-    `Total: ₹${total.toLocaleString('en-IN')}\n\n` +
-    `Please confirm availability and share payment details.`
+      `Product: ${productName}\n` +
+      `Quantity: ${quantity}\n` +
+      `Total: ₹${total.toLocaleString("en-IN")}\n\n` +
+      `Please confirm availability and share payment details.`
   );
 
-  // IMPORTANT: Never navigate the current iframe to wa.me (it blocks being embedded),
-  // always open in a new tab/window.
-  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+};
 
-  const opened = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
-  if (opened) return;
-
-  // Fallback for environments that block window.open (e.g. iframe sandbox/popup blocker)
-  const link = document.createElement("a");
-  link.href = whatsappUrl;
-  link.target = "_blank";
-  link.rel = "noopener noreferrer";
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+// Backwards-compatible helper (prefer using getWhatsAppOrderUrl + UI fallback).
+export const openWhatsAppOrder = (productName: string, quantity: number = 1, price: number = 999) => {
+  const url = getWhatsAppOrderUrl(productName, quantity, price);
+  window.open(url, "_blank", "noopener,noreferrer");
 };
 
