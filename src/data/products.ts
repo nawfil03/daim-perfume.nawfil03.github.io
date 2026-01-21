@@ -26,6 +26,8 @@ export interface Product {
   price: number;
 }
 
+export const WHATSAPP_NUMBER = "919363252579";
+
 export const products: Product[] = [
   {
     id: "golden-elysia",
@@ -167,4 +169,16 @@ export const products: Product[] = [
 
 export const getProductById = (id: string): Product | undefined => {
   return products.find(product => product.id === id);
+};
+
+export const openWhatsAppOrder = (productName: string, quantity: number = 1, price: number = 999) => {
+  const total = price * quantity;
+  const message = encodeURIComponent(
+    `Hi! I would like to order from DAIM Perfumes:\n\n` +
+    `Product: ${productName}\n` +
+    `Quantity: ${quantity}\n` +
+    `Total: ₹${total.toLocaleString('en-IN')}\n\n` +
+    `Please confirm availability and share payment details.`
+  );
+  window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${message}`, '_blank');
 };
