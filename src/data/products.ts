@@ -181,12 +181,7 @@ export const openWhatsAppOrder = (productName: string, quantity: number = 1, pri
     `Please confirm availability and share payment details.`
   );
   
-  // Create a temporary link and click it to avoid popup blockers
-  const link = document.createElement('a');
-  link.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
-  link.target = '_blank';
-  link.rel = 'noopener noreferrer';
-  document.body.appendChild(link);
-  link.click();
-  document.body.removeChild(link);
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+  window.location.href = whatsappUrl;
 };
+
