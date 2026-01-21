@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { ShoppingBag } from "lucide-react";
-import { toast } from "sonner";
+import { openWhatsAppOrder } from "@/data/products";
 
 interface ProductCardProps {
   id: string;
@@ -15,9 +15,7 @@ const ProductCard = ({ id, image, name, description, price, index }: ProductCard
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    toast.success(`${name} added to cart`, {
-      description: "Continue shopping or proceed to checkout",
-    });
+    openWhatsAppOrder(name, 1, price);
   };
 
   return (

@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { ArrowLeft, Droplets, Leaf, FlaskConical, ShoppingBag, Heart, Minus, Plus, Truck, Shield, RotateCcw } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { getProductById, products } from "@/data/products";
+import { getProductById, products, openWhatsAppOrder } from "@/data/products";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,9 +16,7 @@ const ProductDetail = () => {
   }
 
   const handleAddToCart = () => {
-    toast.success(`${quantity}x ${product.name} added to cart`, {
-      description: `Total: ₹${(product.price * quantity).toLocaleString('en-IN')}`,
-    });
+    openWhatsAppOrder(product.name, quantity, product.price);
   };
 
   const handleWishlist = () => {
