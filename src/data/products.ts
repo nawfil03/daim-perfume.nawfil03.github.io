@@ -180,8 +180,21 @@ export const openWhatsAppOrder = (productName: string, quantity: number = 1, pri
     `Total: ₹${total.toLocaleString('en-IN')}\n\n` +
     `Please confirm availability and share payment details.`
   );
-  
+
+  // IMPORTANT: Never navigate the current iframe to wa.me (it blocks being embedded),
+  // always open in a new tab/window.
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
-  window.location.href = whatsappUrl;
+
+  const opened = window.open(whatsappUrl, "_blank", "noopener,noreferrer");
+  if (opened) return;
+
+  // Fallback for environments that block window.open (e.g. iframe sandbox/popup blocker)
+  const link = document.createElement("a");
+  link.href = whatsappUrl;
+  link.target = "_blank";
+  link.rel = "noopener noreferrer";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 };
 
