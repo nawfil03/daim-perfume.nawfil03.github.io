@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ShoppingBag } from "lucide-react";
-import { openWhatsAppOrder } from "@/data/products";
+import { toast } from "sonner";
+import { WHATSAPP_NUMBER } from "@/data/products";
 
 interface ProductCardProps {
   id: string;
@@ -15,7 +16,33 @@ const ProductCard = ({ id, image, name, description, price, index }: ProductCard
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    openWhatsAppOrder(name, 1, price);
+
+    const quantity = 1;
+    const total = price * quantity;
+    const message = encodeURIComponent(
+      `Hi! I would like to order from DAIM Perfumes:\n\n` +
+        `Product: ${name}\n` +
+        `Quantity: ${quantity}\n` +
+        `Total: ₹${total.toLocaleString("en-IN")}\n\n` +
+        `Please confirm availability and share payment details.`
+    );
+
+    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
+
+    // Lovable preview runs inside an iframe; WhatsApp refuses to load there.
+    // In preview we copy the link, on the published site we open a new tab.
+    const inIframe = window.self !== window.top;
+    if (inIframe) {
+      navigator.clipboard?.writeText?.(url);
+      toast.success("WhatsApp link copied", { description: "Open a new tab (or WhatsApp) and paste the link." });
+      return;
+    }
+
+    const opened = window.open(url, "_blank", "noopener,noreferrer");
+    if (!opened) {
+      navigator.clipboard?.writeText?.(url);
+      toast.error("Popup blocked", { description: "WhatsApp link copied. Please allow popups." });
+    }
   };
 
   return (

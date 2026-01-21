@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet-async";
 import { ArrowLeft, Droplets, Leaf, FlaskConical, ShoppingBag, Heart, Minus, Plus, Truck, Shield, RotateCcw } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
-import { getProductById, products, openWhatsAppOrder } from "@/data/products";
+import { getProductById, products, getWhatsAppOrderUrl } from "@/data/products";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -16,7 +16,22 @@ const ProductDetail = () => {
   }
 
   const handleAddToCart = () => {
-    openWhatsAppOrder(product.name, quantity, product.price);
+    const url = getWhatsAppOrderUrl(product.name, quantity, product.price);
+
+    // Lovable preview runs inside an iframe; WhatsApp refuses to load there.
+    // In preview we copy the link, on the published site we open a new tab.
+    const inIframe = window.self !== window.top;
+    if (inIframe) {
+      navigator.clipboard?.writeText?.(url);
+      toast.success("WhatsApp link copied", { description: "Open a new tab (or WhatsApp) and paste the link." });
+      return;
+    }
+
+    const opened = window.open(url, "_blank", "noopener,noreferrer");
+    if (!opened) {
+      navigator.clipboard?.writeText?.(url);
+      toast.error("Popup blocked", { description: "WhatsApp link copied. Please allow popups." });
+    }
   };
 
   const handleWishlist = () => {
