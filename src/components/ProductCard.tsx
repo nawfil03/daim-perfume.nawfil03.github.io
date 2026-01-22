@@ -29,19 +29,12 @@ const ProductCard = ({ id, image, name, description, price, index }: ProductCard
 
     const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
 
-    // Lovable preview runs inside an iframe; WhatsApp refuses to load there.
-    // In preview we copy the link, on the published site we open a new tab.
-    const inIframe = window.self !== window.top;
-    if (inIframe) {
-      navigator.clipboard?.writeText?.(url);
-      toast.success("WhatsApp link copied", { description: "Open a new tab (or WhatsApp) and paste the link." });
-      return;
-    }
-
+    // Try to open WhatsApp directly on click (works on published site and in many browsers).
+    // If the environment blocks popups (common in embedded previews/iframes), fall back to copying.
     const opened = window.open(url, "_blank", "noopener,noreferrer");
     if (!opened) {
       navigator.clipboard?.writeText?.(url);
-      toast.error("Popup blocked", { description: "WhatsApp link copied. Please allow popups." });
+      toast.error("Couldn't open WhatsApp", { description: "Link copied — open a new tab (or WhatsApp) and paste it." });
     }
   };
 
