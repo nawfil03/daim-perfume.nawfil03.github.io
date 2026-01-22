@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { ShoppingBag } from "lucide-react";
-import { toast } from "sonner";
 import { WHATSAPP_NUMBER } from "@/data/products";
 
 interface ProductCardProps {
@@ -13,30 +12,16 @@ interface ProductCardProps {
 }
 
 const ProductCard = ({ id, image, name, description, price, index }: ProductCardProps) => {
-  const handleAddToCart = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-
-    const quantity = 1;
-    const total = price * quantity;
-    const message = encodeURIComponent(
-      `Hi! I would like to order from DAIM Perfumes:\n\n` +
-        `Product: ${name}\n` +
-        `Quantity: ${quantity}\n` +
-        `Total: ₹${total.toLocaleString("en-IN")}\n\n` +
-        `Please confirm availability and share payment details.`
-    );
-
-    const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
-
-    // Try to open WhatsApp directly on click (works on published site and in many browsers).
-    // If the environment blocks popups (common in embedded previews/iframes), fall back to copying.
-    const opened = window.open(url, "_blank", "noopener,noreferrer");
-    if (!opened) {
-      navigator.clipboard?.writeText?.(url);
-      toast.error("Couldn't open WhatsApp", { description: "Link copied — open a new tab (or WhatsApp) and paste it." });
-    }
-  };
+  const quantity = 1;
+  const total = price * quantity;
+  const message = encodeURIComponent(
+    `Hi! I would like to order from DAIM Perfumes:\n\n` +
+      `Product: ${name}\n` +
+      `Quantity: ${quantity}\n` +
+      `Total: ₹${total.toLocaleString("en-IN")}\n\n` +
+      `Please confirm availability and share payment details.`
+  );
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
 
   return (
     <Link 
@@ -53,13 +38,16 @@ const ProductCard = ({ id, image, name, description, price, index }: ProductCard
         />
         {/* Overlay on Hover */}
         <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-          <button
-            onClick={handleAddToCart}
+          <a
+            href={whatsappUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={(e) => e.stopPropagation()}
             className="px-8 py-3 bg-primary text-primary-foreground text-xs tracking-[0.2em] uppercase font-medium flex items-center gap-2 hover:bg-primary/90 transition-colors"
           >
             <ShoppingBag size={16} />
             Add to Bag
-          </button>
+          </a>
         </div>
       </div>
 
