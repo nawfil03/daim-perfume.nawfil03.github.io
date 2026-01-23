@@ -1,7 +1,7 @@
 import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowLeft, Droplets, Leaf, FlaskConical, ShoppingBag, Heart, Minus, Plus, Truck, Shield, RotateCcw } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getProductById, products, WHATSAPP_NUMBER } from "@/data/products";
 import { toast } from "sonner";
 
@@ -10,6 +10,10 @@ const ProductDetail = () => {
   const product = id ? getProductById(id) : undefined;
   const [quantity, setQuantity] = useState(1);
   const [isWishlisted, setIsWishlisted] = useState(false);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   if (!product) {
     return <Navigate to="/" replace />;

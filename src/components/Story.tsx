@@ -1,4 +1,4 @@
-import aureliaLuxe from "@/assets/aurelia-luxe.jpeg";
+import daimHero from "@/assets/daim-hero.png";
 
 const Story = () => {
   return (
@@ -13,8 +13,8 @@ const Story = () => {
           <div className="relative">
             <div className="aspect-[3/4] overflow-hidden">
               <img
-                src={aureliaLuxe}
-                alt="DAIM craftsmanship"
+                src={daimHero}
+                alt="DAIM Luxury Fragrance"
                 className="w-full h-full object-cover"
               />
             </div>
