@@ -42,7 +42,8 @@ const ProductCard = ({ id, image, name, description, price, index }: ProductCard
             onClick={(e) => {
               e.preventDefault();
               e.stopPropagation();
-              window.open(whatsappUrl, "_blank");
+              const url = whatsappUrl;
+              window.open(url, '_blank');
             }}
             className="px-8 py-3 bg-primary text-primary-foreground text-xs tracking-[0.2em] uppercase font-medium flex items-center gap-2 hover:bg-primary/90 transition-colors"
           >

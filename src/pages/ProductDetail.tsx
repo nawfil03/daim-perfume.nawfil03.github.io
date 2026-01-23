@@ -117,7 +117,10 @@ const ProductDetail = () => {
                     </button>
                   </div>
                   <button 
-                    onClick={() => window.open(whatsappUrl, "_blank")}
+                    onClick={() => {
+                      const url = whatsappUrl;
+                      window.open(url, '_blank');
+                    }}
                     className="w-full bg-primary text-primary-foreground py-4 flex items-center justify-center gap-3 hover:bg-primary/90 transition-colors"
                   >
                     <ShoppingBag size={20} />
