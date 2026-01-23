@@ -2,7 +2,7 @@ import { useParams, Link, Navigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import { ArrowLeft, Droplets, Leaf, FlaskConical, ShoppingBag, Heart, Minus, Plus, Truck, Shield, RotateCcw } from "lucide-react";
 import { useState } from "react";
-import { getProductById, products, getWhatsAppOrderUrl } from "@/data/products";
+import { getProductById, products, WHATSAPP_NUMBER } from "@/data/products";
 import { toast } from "sonner";
 
 const ProductDetail = () => {
@@ -15,7 +15,16 @@ const ProductDetail = () => {
     return <Navigate to="/" replace />;
   }
 
-  const whatsappUrl = getWhatsAppOrderUrl(product.name, quantity, product.price);
+  const total = product.price * quantity;
+  const encodedText = encodeURIComponent(
+    `Hi! I would like to order from DAIM Perfumes:\n\n` +
+      `Product: ${product.name}\n` +
+      `Quantity: ${quantity}\n` +
+      `Total: ₹${total.toLocaleString("en-IN")}\n\n` +
+      `Please confirm availability and share payment details.`
+  );
+
+  const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`;
 
   const handleWishlist = () => {
     setIsWishlisted(!isWishlisted);
@@ -116,16 +125,15 @@ const ProductDetail = () => {
                       <Heart size={20} fill={isWishlisted ? "currentColor" : "none"} />
                     </button>
                   </div>
-                  <button 
-                    onClick={() => {
-                      const url = whatsappUrl;
-                      window.open(url, '_blank');
-                    }}
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="w-full bg-primary text-primary-foreground py-4 flex items-center justify-center gap-3 hover:bg-primary/90 transition-colors"
                   >
                     <ShoppingBag size={20} />
                     <span className="font-medium tracking-wider">ADD TO BAG - ₹{(product.price * quantity).toLocaleString('en-IN')}</span>
-                  </button>
+                  </a>
                 </div>
 
                 {/* Features */}
