@@ -116,15 +116,13 @@ const ProductDetail = () => {
                       <Heart size={20} fill={isWishlisted ? "currentColor" : "none"} />
                     </button>
                   </div>
-                  <a 
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  <button 
+                    onClick={() => window.open(whatsappUrl, "_blank")}
                     className="w-full bg-primary text-primary-foreground py-4 flex items-center justify-center gap-3 hover:bg-primary/90 transition-colors"
                   >
                     <ShoppingBag size={20} />
                     <span className="font-medium tracking-wider">ADD TO BAG - ₹{(product.price * quantity).toLocaleString('en-IN')}</span>
-                  </a>
+                  </button>
                 </div>
 
                 {/* Features */}
