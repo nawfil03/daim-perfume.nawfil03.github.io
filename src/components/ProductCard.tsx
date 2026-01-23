@@ -38,16 +38,17 @@ const ProductCard = ({ id, image, name, description, price, index }: ProductCard
         />
         {/* Overlay on Hover */}
         <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-center justify-center">
-          <a
-            href={whatsappUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            onClick={(e) => e.stopPropagation()}
+          <button
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              window.open(whatsappUrl, "_blank");
+            }}
             className="px-8 py-3 bg-primary text-primary-foreground text-xs tracking-[0.2em] uppercase font-medium flex items-center gap-2 hover:bg-primary/90 transition-colors"
           >
             <ShoppingBag size={16} />
             Add to Bag
-          </a>
+          </button>
         </div>
       </div>
 
