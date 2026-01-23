@@ -1,4 +1,4 @@
-import oudEclipse from "@/assets/oud-eclipse.jpeg";
+import daimHero from "@/assets/daim-hero.png";
 
 const Hero = () => {
   return (
@@ -6,12 +6,12 @@ const Hero = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <img
-          src={oudEclipse}
-          alt="DAIM Oud Eclipse"
-          className="w-full h-full object-cover object-center scale-110"
+          src={daimHero}
+          alt="DAIM Luxury Fragrance"
+          className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-background via-background/80 to-background/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/50" />
+        <div className="absolute inset-0 bg-gradient-to-r from-background/60 via-background/30 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent" />
       </div>
 
       {/* Content */}
