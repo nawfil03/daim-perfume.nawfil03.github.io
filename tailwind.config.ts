@@ -60,9 +60,12 @@ export default {
         gold: "hsl(var(--gold))",
         "gold-light": "hsl(var(--gold-light))",
         "gold-dark": "hsl(var(--gold-dark))",
+        "gold-muted": "hsl(var(--gold-muted))",
         champagne: "hsl(var(--champagne))",
+        ivory: "hsl(var(--ivory))",
         obsidian: "hsl(var(--obsidian))",
         charcoal: "hsl(var(--charcoal))",
+        jet: "hsl(var(--jet))",
       },
       fontFamily: {
         display: ['Cormorant Garamond', 'serif'],
