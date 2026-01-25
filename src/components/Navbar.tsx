@@ -32,17 +32,16 @@ const Navbar = () => {
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-        isScrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${isScrolled
           ? "glass py-4"
           : "bg-transparent py-6"
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex flex-col items-start group">
-            <motion.span 
+            <motion.span
               className="font-display text-2xl lg:text-3xl tracking-[0.3em] text-foreground font-medium group-hover:text-primary transition-colors duration-500"
               whileHover={{ letterSpacing: "0.35em" }}
               transition={{ duration: 0.3 }}
@@ -118,25 +117,25 @@ const Navbar = () => {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
-              className="lg:hidden absolute top-full left-0 right-0 glass border-b border-border/50 overflow-hidden"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+              className="fixed inset-0 z-40 bg-background/95 backdrop-blur-xl flex flex-col items-center justify-center lg:hidden"
             >
-              <div className="px-6 py-8 flex flex-col gap-6">
+              <div className="flex flex-col gap-8 text-center">
                 {navLinks.map((link, index) => (
                   <motion.div
                     key={link.name}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.1 }}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: 0.1 + index * 0.1 }}
                   >
                     {link.isPage ? (
                       <Link
                         to={link.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="text-lg tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition-colors duration-500 font-light"
+                        className="font-display text-3xl tracking-[0.2em] text-foreground hover:text-primary transition-colors duration-500 font-light"
                       >
                         {link.name}
                       </Link>
@@ -144,7 +143,7 @@ const Navbar = () => {
                       <a
                         href={link.href}
                         onClick={() => setIsMobileMenuOpen(false)}
-                        className="text-lg tracking-[0.2em] uppercase text-muted-foreground hover:text-primary transition-colors duration-500 font-light"
+                        className="font-display text-3xl tracking-[0.2em] text-foreground hover:text-primary transition-colors duration-500 font-light"
                       >
                         {link.name}
                       </a>

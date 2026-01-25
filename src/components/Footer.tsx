@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Instagram, Facebook, Twitter, ArrowUpRight } from "lucide-react";
+import { Instagram, ArrowUpRight } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -11,7 +11,7 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-6 lg:px-12 py-20 lg:py-28 relative z-10">
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-16 lg:gap-12">
           {/* Brand */}
-          <motion.div 
+          <motion.div
             className="lg:col-span-2"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -27,18 +27,16 @@ const Footer = () => {
               </p>
             </div>
             <p className="text-muted-foreground font-light leading-relaxed max-w-md mb-10 text-base">
-              Experience the art of luxury perfumery. Each DAIM fragrance is crafted 
-              to tell your unique story, leaving an unforgettable impression wherever 
+              Experience the art of luxury perfumery. Each DAIM fragrance is crafted
+              to tell your unique story, leaving an unforgettable impression wherever
               you go.
             </p>
             {/* Social Links */}
             <div className="flex gap-4">
               {[
-                { icon: Instagram, href: "#" },
-                { icon: Facebook, href: "#" },
-                { icon: Twitter, href: "#" },
+                { icon: Instagram, href: "https://www.instagram.com/daim.intry?igsh=MWZxcTA0d3dkZzd5ZQ==" },
               ].map((social, index) => (
-                <motion.a 
+                <motion.a
                   key={index}
                   href={social.href}
                   className="w-12 h-12 border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary transition-all duration-500 group"
@@ -69,8 +67,8 @@ const Footer = () => {
                 { name: "Contact", href: "/contact" },
               ].map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
+                  <a
+                    href={link.href}
                     className="group flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-500 font-light"
                   >
                     {link.name}
@@ -93,19 +91,27 @@ const Footer = () => {
             </h4>
             <ul className="space-y-5 text-muted-foreground font-light">
               <li>
-                <a 
-                  href="mailto:contact@daim.com" 
+                <a
+                  href="mailto:daimstory@gmail.com"
                   className="hover:text-primary transition-colors duration-500"
                 >
-                  contact@daim.com
+                  daimstory@gmail.com
                 </a>
               </li>
               <li>
-                <a 
-                  href="tel:+1234567890" 
+                <a
+                  href="tel:+918825736693"
                   className="hover:text-primary transition-colors duration-500"
                 >
-                  +1 (234) 567-890
+                  +91 88257 36693
+                </a>
+              </li>
+              <li>
+                <a
+                  href="tel:+971557947447"
+                  className="hover:text-primary transition-colors duration-500"
+                >
+                  +971 55 794 7447
                 </a>
               </li>
               <li className="pt-4">
@@ -113,12 +119,12 @@ const Footer = () => {
                   Newsletter
                 </span>
                 <div className="flex">
-                  <input 
-                    type="email" 
+                  <input
+                    type="email"
                     placeholder="Your email"
                     className="flex-1 bg-background border border-border px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary transition-colors duration-300"
                   />
-                  <motion.button 
+                  <motion.button
                     className="px-5 bg-primary text-primary-foreground text-xs tracking-wider uppercase hover:bg-gold-light transition-colors duration-300"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
@@ -136,7 +142,7 @@ const Footer = () => {
       <div className="border-t border-border">
         <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-            <motion.p 
+            <motion.p
               className="text-xs text-muted-foreground tracking-wider"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -145,7 +151,7 @@ const Footer = () => {
             >
               © 2024 DAIM. All rights reserved.
             </motion.p>
-            <motion.div 
+            <motion.div
               className="flex gap-8 text-xs text-muted-foreground"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}

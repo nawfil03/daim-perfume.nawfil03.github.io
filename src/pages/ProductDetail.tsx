@@ -22,10 +22,10 @@ const ProductDetail = () => {
   const total = product.price * quantity;
   const encodedText = encodeURIComponent(
     `Hi! I would like to order from DAIM Perfumes:\n\n` +
-      `Product: ${product.name}\n` +
-      `Quantity: ${quantity}\n` +
-      `Total: ₹${total.toLocaleString("en-IN")}\n\n` +
-      `Please confirm availability and share payment details.`
+    `Product: ${product.name}\n` +
+    `Quantity: ${quantity}\n` +
+    `Total: ₹${total.toLocaleString("en-IN")}\n\n` +
+    `Please confirm availability and share payment details.`
   );
 
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedText}`;
@@ -71,7 +71,7 @@ const ProductDetail = () => {
         <section className="pt-24 lg:pt-32">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center min-h-[calc(100vh-6rem)]">
-              
+
               {/* Product Image */}
               <div className="relative animate-fade-in">
                 <div className="aspect-square overflow-hidden bg-card">
@@ -98,7 +98,7 @@ const ProductDetail = () => {
                   {product.description}
                 </p>
                 <div className="w-16 h-px bg-primary mb-8" />
-                
+
                 <p className="text-muted-foreground font-light leading-relaxed mb-8">
                   {product.story}
                 </p>
@@ -109,6 +109,11 @@ const ProductDetail = () => {
 
                 {/* Price */}
                 <div className="flex items-baseline gap-4 mb-8">
+                  {product.originalPrice && (
+                    <span className="text-xl text-muted-foreground line-through decoration-primary/50">
+                      ₹{product.originalPrice.toLocaleString('en-IN')}
+                    </span>
+                  )}
                   <span className="font-display text-4xl text-primary">₹{product.price.toLocaleString('en-IN')}</span>
                   <span className="text-muted-foreground text-sm">{product.size}</span>
                 </div>
@@ -136,7 +141,7 @@ const ProductDetail = () => {
                     className="w-full bg-primary text-primary-foreground py-4 flex items-center justify-center gap-3 hover:bg-primary/90 transition-colors"
                   >
                     <ShoppingBag size={20} />
-                    <span className="font-medium tracking-wider">ADD TO BAG - ₹{(product.price * quantity).toLocaleString('en-IN')}</span>
+                    <span className="font-medium tracking-wider">CLICK TO PURCHASE - ₹{(product.price * quantity).toLocaleString('en-IN')}</span>
                   </a>
                 </div>
 

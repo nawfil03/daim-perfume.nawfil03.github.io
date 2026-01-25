@@ -24,6 +24,7 @@ export interface Product {
   concentration: string;
   size: string;
   price: number;
+  originalPrice?: number;
 }
 
 export const WHATSAPP_NUMBER = "919363252579";
@@ -43,8 +44,9 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Limonene", "Linalool", "Benzyl Benzoate", "Citral", "Geraniol", "Benzyl Alcohol", "Farnesol"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz",
-    price: 999
+    size: "50ml",
+    price: 699,
+    originalPrice: 999
   },
   {
     id: "rebel-rose",
@@ -60,8 +62,9 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Linalool", "Hydroxycitronellal", "Limonene", "Citronellol", "Geraniol", "Alpha-Isomethyl Ionone"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz",
-    price: 999
+    size: "50ml",
+    price: 699,
+    originalPrice: 999
   },
   {
     id: "victory-noir",
@@ -77,8 +80,9 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Limonene", "Linalool", "Coumarin", "Citral", "Geraniol", "Eugenol", "Citronellol"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz",
-    price: 999
+    size: "50ml",
+    price: 699,
+    originalPrice: 999
   },
   {
     id: "oud-eclipse",
@@ -94,8 +98,9 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Limonene", "Coumarin", "Linalool", "Citronellol", "Geraniol", "Eugenol", "Farnesol"],
     concentration: "Eau de Parfum Intense",
-    size: "100ml / 3.4 fl oz",
-    price: 999
+    size: "50ml",
+    price: 699,
+    originalPrice: 999
   },
   {
     id: "midnight-ember",
@@ -111,8 +116,9 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Linalool", "Limonene", "Coumarin", "Alpha-Isomethyl Ionone", "Citronellol", "Citral"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz",
-    price: 999
+    size: "50ml",
+    price: 699,
+    originalPrice: 999
   },
   {
     id: "aurelia-luxe",
@@ -128,8 +134,9 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Linalool", "Limonene", "Hydroxycitronellal", "Alpha-Isomethyl Ionone", "Geraniol", "Citral"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz",
-    price: 999
+    size: "50ml",
+    price: 699,
+    originalPrice: 999
   },
   {
     id: "wild-horizon",
@@ -145,8 +152,9 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Limonene", "Linalool", "Citronellol", "Coumarin", "Geraniol", "Citral"],
     concentration: "Eau de Parfum",
-    size: "100ml / 3.4 fl oz",
-    price: 999
+    size: "50ml",
+    price: 699,
+    originalPrice: 999
   },
   {
     id: "dune-imperial",
@@ -162,8 +170,9 @@ export const products: Product[] = [
     ],
     ingredients: ["Alcohol Denat.", "Parfum", "Aqua", "Coumarin", "Limonene", "Linalool", "Eugenol", "Cinnamal", "Benzyl Benzoate"],
     concentration: "Eau de Parfum Intense",
-    size: "100ml / 3.4 fl oz",
-    price: 999
+    size: "50ml",
+    price: 699,
+    originalPrice: 999
   }
 ];
 
@@ -174,22 +183,22 @@ export const getProductById = (id: string): Product | undefined => {
 export const getWhatsAppOrderUrl = (
   productName: string,
   quantity: number = 1,
-  price: number = 999
+  price: number = 699
 ) => {
   const total = price * quantity;
   const message = encodeURIComponent(
     `Hi! I would like to order from DAIM Perfumes:\n\n` +
-      `Product: ${productName}\n` +
-      `Quantity: ${quantity}\n` +
-      `Total: ₹${total.toLocaleString("en-IN")}\n\n` +
-      `Please confirm availability and share payment details.`
+    `Product: ${productName}\n` +
+    `Quantity: ${quantity}\n` +
+    `Total: ₹${total.toLocaleString("en-IN")}\n\n` +
+    `Please confirm availability and share payment details.`
   );
 
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
 };
 
 // Backwards-compatible helper (prefer using getWhatsAppOrderUrl + UI fallback).
-export const openWhatsAppOrder = (productName: string, quantity: number = 1, price: number = 999) => {
+export const openWhatsAppOrder = (productName: string, quantity: number = 1, price: number = 699) => {
   const url = getWhatsAppOrderUrl(productName, quantity, price);
   window.open(url, "_blank", "noopener,noreferrer");
 };

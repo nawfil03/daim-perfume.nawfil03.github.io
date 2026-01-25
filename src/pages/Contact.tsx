@@ -14,18 +14,24 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 1500));
-    
+
+    // Construct mailto link
+    const mailtoLink = `mailto:daimstory@gmail.com?subject=${encodeURIComponent(
+      formData.subject ? `DAIM Inquiry: ${formData.subject}` : "DAIM Inquiry"
+    )}&body=${encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    )}`;
+
+    window.location.href = mailtoLink;
+
     toast({
-      title: "Message Sent",
-      description: "Thank you for reaching out. We'll respond within 24 hours.",
+      title: "Opening Email Client",
+      description: "Please send the pre-filled email to complete your inquiry.",
     });
-    
+
     setFormData({ name: "", email: "", subject: "", message: "" });
     setIsSubmitting(false);
   };
@@ -71,7 +77,7 @@ const Contact = () => {
             </h1>
             <div className="w-20 h-px bg-primary mx-auto mb-6 animate-fade-in" />
             <p className="text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed animate-fade-in">
-              We'd love to hear from you. Whether you have a question about our fragrances, 
+              We'd love to hear from you. Whether you have a question about our fragrances,
               need assistance, or want to share your experience—we're here to help.
             </p>
           </div>
@@ -81,7 +87,7 @@ const Contact = () => {
         <section className="pb-24 lg:pb-32">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
             <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
-              
+
               {/* Contact Form */}
               <div className="order-2 lg:order-1">
                 <h2 className="font-display text-2xl lg:text-3xl text-foreground tracking-wide mb-8">
@@ -120,7 +126,7 @@ const Contact = () => {
                       />
                     </div>
                   </div>
-                  
+
                   <div>
                     <label htmlFor="subject" className="block text-xs tracking-[0.15em] uppercase text-muted-foreground mb-3">
                       Subject
@@ -175,17 +181,16 @@ const Contact = () => {
                 <h2 className="font-display text-2xl lg:text-3xl text-foreground tracking-wide mb-8">
                   Get in Touch
                 </h2>
-                
+
                 <div className="space-y-8">
                   <div className="flex items-start gap-5">
                     <div className="w-12 h-12 border border-primary/30 flex items-center justify-center flex-shrink-0">
                       <MapPin size={20} className="text-primary" />
                     </div>
                     <div>
-                      <h3 className="text-sm tracking-[0.15em] uppercase text-foreground mb-2">Visit Our Boutique</h3>
+                      <h3 className="text-sm tracking-[0.15em] uppercase text-foreground mb-2">Visit Our Store</h3>
                       <p className="text-muted-foreground font-light leading-relaxed">
-                        123 Luxury Avenue<br />
-                        Dubai, United Arab Emirates
+                        Coming Soon in India & UAE
                       </p>
                     </div>
                   </div>
@@ -196,7 +201,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="text-sm tracking-[0.15em] uppercase text-foreground mb-2">Call Us</h3>
-                      <p className="text-muted-foreground font-light">+971 4 123 4567</p>
+                      <p className="text-muted-foreground font-light">+91 88257 36693</p>
                     </div>
                   </div>
 
@@ -206,7 +211,7 @@ const Contact = () => {
                     </div>
                     <div>
                       <h3 className="text-sm tracking-[0.15em] uppercase text-foreground mb-2">Email Us</h3>
-                      <p className="text-muted-foreground font-light">hello@daimperfumes.com</p>
+                      <p className="text-muted-foreground font-light">daimstory@gmail.com</p>
                     </div>
                   </div>
 

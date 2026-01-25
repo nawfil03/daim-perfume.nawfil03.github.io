@@ -9,18 +9,19 @@ interface ProductCardProps {
   name: string;
   description: string;
   price: number;
+  originalPrice?: number;
   index: number;
 }
 
-const ProductCard = ({ id, image, name, description, price, index }: ProductCardProps) => {
+const ProductCard = ({ id, image, name, description, price, originalPrice, index }: ProductCardProps) => {
   const quantity = 1;
   const total = price * quantity;
   const message = encodeURIComponent(
     `Hi! I would like to order from DAIM Perfumes:\n\n` +
-      `Product: ${name}\n` +
-      `Quantity: ${quantity}\n` +
-      `Total: ₹${total.toLocaleString("en-IN")}\n\n` +
-      `Please confirm availability and share payment details.`
+    `Product: ${name}\n` +
+    `Quantity: ${quantity}\n` +
+    `Total: ₹${total.toLocaleString("en-IN")}\n\n` +
+    `Please confirm availability and share payment details.`
   );
   const whatsappUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${message}`;
 
@@ -37,17 +38,17 @@ const ProductCard = ({ id, image, name, description, price, index }: ProductCard
             transition={{ duration: 0.7, ease: [0.25, 0.4, 0.25, 1] }}
           />
         </Link>
-        
+
         {/* Premium Overlay on Hover */}
-        <motion.div 
+        <motion.div
           className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent pointer-events-none"
           initial={{ opacity: 0 }}
           whileHover={{ opacity: 1 }}
           transition={{ duration: 0.4 }}
         />
-        
-        {/* CTA Overlay */}
-        <div className="absolute inset-0 flex flex-col items-center justify-end p-6 opacity-0 group-hover:opacity-100 transition-all duration-500">
+
+        {/* CTA Overlay (Desktop) */}
+        <div className="hidden lg:flex absolute inset-0 flex-col items-center justify-end p-6 opacity-0 group-hover:opacity-100 transition-all duration-500">
           <a
             href={whatsappUrl}
             target="_blank"
@@ -55,7 +56,7 @@ const ProductCard = ({ id, image, name, description, price, index }: ProductCard
             className="btn-premium w-full px-8 py-4 bg-primary text-primary-foreground text-xs tracking-[0.2em] uppercase font-medium flex items-center justify-center gap-3 hover:bg-gold-light transition-all duration-300 mb-3"
           >
             <ShoppingBag size={16} />
-            Add to Bag
+            Click to Purchase
           </a>
           <Link
             to={`/product/${id}`}
@@ -72,19 +73,39 @@ const ProductCard = ({ id, image, name, description, price, index }: ProductCard
       </div>
 
       {/* Product Info */}
-      <Link to={`/product/${id}`} className="block mt-6 text-center">
-        <h3 className="font-display text-xl lg:text-2xl text-foreground tracking-wide mb-2 group-hover:text-primary transition-colors duration-300">
-          {name}
-        </h3>
-        <p className="text-sm text-muted-foreground font-light tracking-wide mb-3">
-          {description}
-        </p>
-        <p className="text-lg font-medium text-primary">₹{price.toLocaleString('en-IN')}</p>
-      </Link>
+      <div className="mt-6 text-center">
+        <Link to={`/product/${id}`} className="block">
+          <h3 className="font-display text-xl lg:text-2xl text-foreground tracking-wide mb-2 group-hover:text-primary transition-colors duration-300">
+            {name}
+          </h3>
+          <p className="text-sm text-muted-foreground font-light tracking-wide mb-3">
+            {description}
+          </p>
+          <div className="flex items-center justify-center gap-3 mb-4">
+            {originalPrice && (
+              <span className="text-sm text-muted-foreground line-through decoration-primary/50">
+                ₹{originalPrice.toLocaleString('en-IN')}
+              </span>
+            )}
+            <span className="text-lg font-medium text-primary">₹{price.toLocaleString('en-IN')}</span>
+          </div>
+        </Link>
 
-      {/* Animated Bottom Line */}
-      <motion.div 
-        className="absolute -bottom-2 left-1/2 h-px bg-gradient-to-r from-transparent via-primary to-transparent"
+        {/* Mobile CTA Button */}
+        <a
+          href={whatsappUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="lg:hidden w-full px-6 py-3 bg-primary text-primary-foreground text-xs tracking-[0.2em] uppercase font-medium flex items-center justify-center gap-2 hover:bg-gold-light transition-all duration-300"
+        >
+          <ShoppingBag size={14} />
+          Click to Purchase
+        </a>
+      </div>
+
+      {/* Animated Bottom Line (Desktop Only) */}
+      <motion.div
+        className="hidden lg:block absolute -bottom-2 left-1/2 h-px bg-gradient-to-r from-transparent via-primary to-transparent"
         initial={{ width: 0, x: "-50%" }}
         whileHover={{ width: "80%" }}
         transition={{ duration: 0.5 }}
