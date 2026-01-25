@@ -1,36 +1,55 @@
-import { motion } from "framer-motion";
-import daimHero from "@/assets/landing-background.png";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { products } from "@/data/products";
 
 const Hero = () => {
-  return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* Animated Background Image with Overlay */}
-      <motion.div
-        className="absolute inset-0"
-        initial={{ scale: 1.1 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 1.5, ease: [0.25, 0.4, 0.25, 1] }}
-      >
-        <img
-          src={daimHero}
-          alt="DAIM Luxury Fragrance"
-          className="w-full h-full object-cover object-center"
-        />
-        {/* Premium Gradient Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-r from-background/80 via-background/40 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/30" />
-        <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-transparent to-transparent" />
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
-        {/* Subtle animated glow */}
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % products.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, []);
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
+      {/* Dynamic Background Slideshow */}
+      <div className="absolute inset-0 bg-black">
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={currentImageIndex}
+            className="absolute inset-0"
+            initial={{ opacity: 0, scale: 1.3, filter: "brightness(2) blur(12px)" }}
+            animate={{ opacity: 1, scale: 1, filter: "brightness(1) blur(0px)" }}
+            exit={{ opacity: 0, scale: 1.1, filter: "brightness(0.5) blur(8px)" }}
+            transition={{ duration: 2.2, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <img
+              src={products[currentImageIndex].image}
+              alt="DAIM Luxury Fragrance"
+              className="w-full h-full object-cover object-center"
+            />
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Enlightening Golden Flash Effect */}
         <motion.div
-          className="absolute inset-0 bg-gradient-radial from-primary/5 via-transparent to-transparent"
-          animate={{ opacity: [0.3, 0.5, 0.3] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+          key={`flash-${currentImageIndex}`}
+          className="absolute inset-0 bg-primary/20 z-10 mix-blend-screen pointer-events-none"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: [0, 0.5, 0] }}
+          transition={{ duration: 1.8, ease: "easeOut" }}
         />
-      </motion.div>
+
+        {/* Premium Gradient Overlays - Static on top */}
+        <div className="absolute inset-0 bg-gradient-to-r from-background/90 via-background/60 to-transparent z-10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-transparent to-background/40 z-10" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-transparent to-transparent z-10" />
+      </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
+      <div className="relative z-20 max-w-7xl mx-auto px-6 lg:px-12 w-full">
         <div className="max-w-2xl">
           <motion.div
             className="overflow-hidden mb-6"
@@ -107,7 +126,7 @@ const Hero = () => {
 
       {/* Premium Scroll Indicator */}
       <motion.div
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4"
+        className="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center gap-4 z-20"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 1, delay: 1.5 }}
@@ -121,10 +140,10 @@ const Hero = () => {
       </motion.div>
 
       {/* Decorative Corner Elements */}
-      <div className="absolute top-20 left-6 lg:left-12 w-20 h-px bg-gradient-to-r from-primary/40 to-transparent" />
-      <div className="absolute top-20 left-6 lg:left-12 w-px h-20 bg-gradient-to-b from-primary/40 to-transparent" />
-      <div className="absolute bottom-20 right-6 lg:right-12 w-20 h-px bg-gradient-to-l from-primary/40 to-transparent" />
-      <div className="absolute bottom-20 right-6 lg:right-12 w-px h-20 bg-gradient-to-t from-primary/40 to-transparent" />
+      <div className="absolute top-20 left-6 lg:left-12 w-20 h-px bg-gradient-to-r from-primary/40 to-transparent z-20" />
+      <div className="absolute top-20 left-6 lg:left-12 w-px h-20 bg-gradient-to-b from-primary/40 to-transparent z-20" />
+      <div className="absolute bottom-20 right-6 lg:right-12 w-20 h-px bg-gradient-to-l from-primary/40 to-transparent z-20" />
+      <div className="absolute bottom-20 right-6 lg:right-12 w-px h-20 bg-gradient-to-t from-primary/40 to-transparent z-20" />
     </section>
   );
 };
