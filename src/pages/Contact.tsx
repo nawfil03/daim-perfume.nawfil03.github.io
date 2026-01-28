@@ -3,6 +3,8 @@ import { Helmet } from "react-helmet-async";
 import { Link } from "react-router-dom";
 import { ArrowLeft, Send, MapPin, Phone, Mail, Clock } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { motion } from "framer-motion";
+import Footer from "@/components/Footer";
 
 const Contact = () => {
   const { toast } = useToast();
@@ -50,7 +52,13 @@ const Contact = () => {
         <meta name="description" content="Get in touch with DAIM. We'd love to hear from you about our luxury fragrances, collaborations, or any questions you may have." />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <motion.div
+        className="min-h-screen bg-background"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         {/* Header */}
         <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -249,15 +257,8 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-border/30 py-8">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 text-center">
-            <p className="text-xs text-muted-foreground tracking-wider">
-              © 2024 DAIM. All rights reserved.
-            </p>
-          </div>
-        </footer>
-      </div>
+        <Footer />
+      </motion.div>
     </>
   );
 };

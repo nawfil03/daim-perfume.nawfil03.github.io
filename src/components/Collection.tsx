@@ -1,80 +1,33 @@
-import { motion } from "framer-motion";
+import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import ProductCard from "./ProductCard";
 import { products } from "@/data/products";
+import { MouseEvent } from "react";
 
 const Collection = () => {
   return (
-    <section id="collection" className="py-28 lg:py-40 bg-background relative overflow-hidden">
-      {/* Premium Background Elements */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-primary/3 rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/3 rounded-full blur-3xl" />
-      </div>
+    <section id="collection" className="py-24 lg:py-32 bg-secondary/30 relative">
+      <div className="max-w-[1600px] mx-auto px-6 lg:px-12 relative z-10">
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 relative z-10">
-        {/* Section Header */}
+        {/* Header */}
         <motion.div
-          className="text-center mb-20 lg:mb-28"
-          initial={{ opacity: 0, y: 40 }}
+          className="text-center mb-16 lg:mb-24"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
         >
-          <motion.p
-            className="text-xs tracking-[0.5em] uppercase text-primary mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-          >
+          <span className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-4 block">
             The Collection
-          </motion.p>
-          <motion.h2
-            className="font-display text-5xl md:text-6xl lg:text-7xl text-foreground tracking-wide mb-8"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-          >
-            Signature Fragrances
-          </motion.h2>
-          <motion.div
-            className="flex items-center justify-center gap-4 mb-8"
-            initial={{ opacity: 0, scaleX: 0 }}
-            whileInView={{ opacity: 1, scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            <div className="w-16 h-px bg-gradient-to-r from-transparent to-primary" />
-            <div className="w-2 h-2 rotate-45 border border-primary" />
-            <div className="w-16 h-px bg-gradient-to-l from-transparent to-primary" />
-          </motion.div>
-          <motion.p
-            className="text-muted-foreground max-w-2xl mx-auto font-light leading-relaxed text-base lg:text-lg"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-          >
-            Each fragrance in our collection tells a unique story, crafted with the finest
-            ingredients from around the world to create unforgettable olfactory experiences.
-          </motion.p>
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-7xl text-foreground">
+            Scents of Significance
+          </h2>
         </motion.div>
 
-        {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-12">
+        {/* Apple-style Grid Display - Denser Layout */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
           {products.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 60 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{
-                duration: 0.7,
-                delay: index * 0.1,
-                ease: [0.25, 0.4, 0.25, 1]
-              }}
-            >
+            <SpotlightCard key={product.id} index={index}>
               <ProductCard
                 id={product.id}
                 image={product.image}
@@ -84,11 +37,54 @@ const Collection = () => {
                 originalPrice={product.originalPrice}
                 index={index}
               />
-            </motion.div>
+            </SpotlightCard>
           ))}
         </div>
+
       </div>
     </section>
+  );
+};
+
+// Wrapper component for the "Apple" spotlight/hover effect
+const SpotlightCard = ({ children, index }: { children: React.ReactNode; index: number }) => {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  function handleMouseMove({ currentTarget, clientX, clientY }: MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  return (
+    <motion.div
+      className="group relative border border-white/10 bg-background/50 overflow-hidden rounded-2xl"
+      onMouseMove={handleMouseMove}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+    >
+      {/* Spotlight Gradient */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px opacity-0 transition duration-300 group-hover:opacity-100"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              500px circle at ${mouseX}px ${mouseY}px,
+              rgba(64, 191, 191, 0.15),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative h-full p-4 lg:p-6 flex flex-col items-center justify-between">
+        {children}
+      </div>
+    </motion.div>
   );
 };
 

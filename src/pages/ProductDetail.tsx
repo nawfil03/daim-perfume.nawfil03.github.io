@@ -4,6 +4,8 @@ import { ArrowLeft, Droplets, Leaf, FlaskConical, ShoppingBag, Heart, Minus, Plu
 import { useState, useEffect } from "react";
 import { getProductById, products, WHATSAPP_NUMBER } from "@/data/products";
 import { toast } from "sonner";
+import { motion } from "framer-motion";
+import Footer from "@/components/Footer";
 
 const ProductDetail = () => {
   const { id } = useParams<{ id: string }>();
@@ -49,7 +51,13 @@ const ProductDetail = () => {
         <meta name="description" content={`${product.name} - ${product.description}. ${product.story.slice(0, 120)}...`} />
       </Helmet>
 
-      <div className="min-h-screen bg-background">
+      <motion.div
+        className="min-h-screen bg-background"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
+      >
         {/* Header */}
         <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border/50">
           <div className="max-w-7xl mx-auto px-6 lg:px-12">
@@ -273,19 +281,8 @@ const ProductDetail = () => {
           </div>
         </section>
 
-        {/* Footer */}
-        <footer className="border-t border-border/30 py-8">
-          <div className="max-w-7xl mx-auto px-6 lg:px-12 flex flex-col md:flex-row items-center justify-between gap-4">
-            <Link to="/" className="flex flex-col items-center md:items-start">
-              <span className="font-display text-xl tracking-[0.3em] text-foreground font-medium">DAIM</span>
-              <span className="text-[9px] tracking-[0.2em] text-muted-foreground uppercase">Wear Your Story</span>
-            </Link>
-            <p className="text-xs text-muted-foreground tracking-wider">
-              © 2024 DAIM. All rights reserved.
-            </p>
-          </div>
-        </footer>
-      </div>
+        <Footer />
+      </motion.div>
     </>
   );
 };
