@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Instagram, ArrowUpRight, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -33,7 +34,6 @@ const Footer = () => {
 
             <div className="flex gap-6">
               {/* Instagram */}
-              {/* Instagram */}
               <a
                 href="https://www.instagram.com/daim.intry?igsh=MWZxcTA0d3dkZzd5ZQ=="
                 target="_blank"
@@ -61,10 +61,23 @@ const Footer = () => {
                 { label: "Contact Us", href: "/contact-us" },
               ].map((item, idx) => (
                 <li key={idx}>
-                  <a href={item.href} className="text-white/60 hover:text-primary transition-colors duration-300 flex items-center gap-2 group">
-                    <span className="h-px w-0 bg-primary group-hover:w-4 transition-all duration-300" />
-                    {item.label}
-                  </a>
+                  {item.href.startsWith("/") ? (
+                    <Link
+                      to={item.href}
+                      className="text-white/60 hover:text-primary transition-colors duration-300 flex items-center gap-2 group"
+                    >
+                      <span className="h-px w-0 bg-primary group-hover:w-4 transition-all duration-300" />
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={item.href}
+                      className="text-white/60 hover:text-primary transition-colors duration-300 flex items-center gap-2 group"
+                    >
+                      <span className="h-px w-0 bg-primary group-hover:w-4 transition-all duration-300" />
+                      {item.label}
+                    </a>
+                  )}
                 </li>
               ))}
             </ul>
