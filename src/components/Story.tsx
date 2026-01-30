@@ -9,11 +9,9 @@ const Story = () => {
         <div className="grid lg:grid-cols-2 gap-16 lg:gap-32 items-center">
 
           {/* Visual Side */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
+
+          <div
+            data-aos="fade-right"
             className="relative"
           >
             <div className="aspect-[4/5] overflow-hidden bg-card">
@@ -27,15 +25,13 @@ const Story = () => {
             <div className="absolute -bottom-12 -left-12 -z-10 text-[10rem] font-display text-foreground/5 pointer-events-none select-none hidden lg:block">
               STORY
             </div>
-          </motion.div>
+          </div>
 
           {/* Text Side */}
           <div className="flex flex-col justify-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
+            <div
+              data-aos="fade-left"
+              data-aos-delay="200"
             >
               <h4 className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-8 flex items-center gap-4">
                 <span className="w-8 h-px bg-primary" />
@@ -59,12 +55,12 @@ const Story = () => {
               </div>
 
               <div className="mt-12 pt-12 border-t border-border/40">
-                <Link to="/contact" className="group flex items-center gap-4 text-foreground uppercase tracking-[0.2em] text-xs font-bold">
+                <Link to="/contact-us" className="group flex items-center gap-4 text-foreground uppercase tracking-[0.2em] text-xs font-bold">
                   <span className="group-hover:text-primary transition-colors">Start Your Journey</span>
                   <span className="w-12 h-px bg-foreground group-hover:w-20 group-hover:bg-primary transition-all duration-300" />
                 </Link>
               </div>
-            </motion.div>
+            </div>
           </div>
         </div>
       </div>

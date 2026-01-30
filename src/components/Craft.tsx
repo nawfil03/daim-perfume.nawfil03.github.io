@@ -24,7 +24,7 @@ const Craft = () => {
       <div className="max-w-[1400px] mx-auto px-6 lg:px-12 relative z-10">
 
         {/* Header */}
-        <div className="mb-24 lg:mb-32">
+        <div className="mb-24 lg:mb-32" data-aos="fade-up">
           <h2 className="font-display text-4xl md:text-6xl text-foreground leading-tight">
             Process of <br />
             <span className="italic text-muted-foreground">Perfection</span>
@@ -34,13 +34,11 @@ const Craft = () => {
         {/* Features Grid */}
         <div className="grid md:grid-cols-3 gap-12 lg:gap-20">
           {features.map((feature, index) => (
-            <motion.div
+            <div
               key={feature.title}
               className="relative pt-12 group"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.2 }}
+              data-aos="fade-up"
+              data-aos-delay={index * 200}
             >
               {/* Giant Background Number */}
               <span className="absolute -top-10 left-0 text-[8rem] font-display text-primary/5 select-none transition-colors duration-500 group-hover:text-primary/10">
@@ -55,12 +53,12 @@ const Craft = () => {
                   {feature.description}
                 </p>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
         {/* Closing Thought */}
-        <div className="mt-32 border-t border-border pt-12 text-center">
+        <div className="mt-32 border-t border-border pt-12 text-center" data-aos="fade-up">
           <p className="font-display text-2xl lg:text-3xl text-foreground/80 italic">
             "True luxury is tailored, not manufactured."
           </p>

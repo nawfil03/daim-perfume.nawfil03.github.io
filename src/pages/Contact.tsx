@@ -192,9 +192,6 @@ const Contact = () => {
 
                 <div className="space-y-8">
                   <div className="flex items-start gap-5">
-                    <div className="w-12 h-12 border border-primary/30 flex items-center justify-center flex-shrink-0">
-                      <MapPin size={20} className="text-primary" />
-                    </div>
                     <div>
                       <h3 className="text-sm tracking-[0.15em] uppercase text-foreground mb-2">Visit Our Store</h3>
                       <p className="text-muted-foreground font-light leading-relaxed">
@@ -204,9 +201,6 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-5">
-                    <div className="w-12 h-12 border border-primary/30 flex items-center justify-center flex-shrink-0">
-                      <Phone size={20} className="text-primary" />
-                    </div>
                     <div>
                       <h3 className="text-sm tracking-[0.15em] uppercase text-foreground mb-2">Call Us</h3>
                       <p className="text-muted-foreground font-light">+91 88257 36693</p>
@@ -214,9 +208,6 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-5">
-                    <div className="w-12 h-12 border border-primary/30 flex items-center justify-center flex-shrink-0">
-                      <Mail size={20} className="text-primary" />
-                    </div>
                     <div>
                       <h3 className="text-sm tracking-[0.15em] uppercase text-foreground mb-2">Email Us</h3>
                       <p className="text-muted-foreground font-light">daimstory@gmail.com</p>
@@ -224,9 +215,6 @@ const Contact = () => {
                   </div>
 
                   <div className="flex items-start gap-5">
-                    <div className="w-12 h-12 border border-primary/30 flex items-center justify-center flex-shrink-0">
-                      <Clock size={20} className="text-primary" />
-                    </div>
                     <div>
                       <h3 className="text-sm tracking-[0.15em] uppercase text-foreground mb-2">Business Hours</h3>
                       <p className="text-muted-foreground font-light leading-relaxed">
@@ -241,15 +229,14 @@ const Contact = () => {
                 <div className="mt-12 pt-12 border-t border-border/30">
                   <p className="text-xs tracking-[0.2em] uppercase text-primary mb-4">Follow Us</p>
                   <div className="flex gap-4">
-                    {["Instagram", "Facebook", "Twitter"].map((social) => (
-                      <a
-                        key={social}
-                        href="#"
-                        className="text-sm text-muted-foreground hover:text-primary transition-colors font-light"
-                      >
-                        {social}
-                      </a>
-                    ))}
+                    <a
+                      href="https://www.instagram.com/daimstory"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-muted-foreground hover:text-primary transition-colors font-light"
+                    >
+                      Instagram
+                    </a>
                   </div>
                 </div>
               </div>

@@ -24,7 +24,7 @@ const Navbar = () => {
     { name: "Collection", href: "#collection", isPage: false },
     { name: "Story", href: "#story", isPage: false },
     { name: "Craft", href: "#craft", isPage: false },
-    { name: "Contact", href: "/contact", isPage: true },
+    { name: "Contact", href: "/contact-us", isPage: true },
   ];
 
   return (
@@ -34,8 +34,8 @@ const Navbar = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled || isMobileMenuOpen
-            ? "bg-background/80 backdrop-blur-md border-b border-white/5 py-4"
-            : "bg-transparent py-6 lg:py-8"
+          ? "bg-background/80 backdrop-blur-md border-b border-white/5 py-4"
+          : "bg-transparent py-6 lg:py-8"
           }`}
       >
         <div className="max-w-[1800px] mx-auto px-6 lg:px-12">

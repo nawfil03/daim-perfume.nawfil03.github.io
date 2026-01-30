@@ -1,20 +1,22 @@
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import ProductCard from "./ProductCard";
 import { products } from "@/data/products";
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect } from "react";
+import AOS from "aos";
 
 const Collection = () => {
+  useEffect(() => {
+    AOS.refresh();
+  }, []);
+
   return (
     <section id="collection" className="py-24 lg:py-32 bg-secondary/30 relative">
       <div className="max-w-[1600px] mx-auto px-6 lg:px-12 relative z-10">
 
         {/* Header */}
-        <motion.div
+        <div
           className="text-center mb-16 lg:mb-24"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
+          data-aos="fade-up"
         >
           <span className="text-xs font-bold tracking-[0.25em] uppercase text-primary mb-4 block">
             The Collection
@@ -22,7 +24,7 @@ const Collection = () => {
           <h2 className="font-display text-4xl md:text-5xl lg:text-7xl text-foreground">
             Scents of Significance
           </h2>
-        </motion.div>
+        </div>
 
         {/* Apple-style Grid Display - Denser Layout */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
@@ -58,13 +60,12 @@ const SpotlightCard = ({ children, index }: { children: React.ReactNode; index: 
   }
 
   return (
-    <motion.div
+    <div
       className="group relative border border-white/10 bg-background/50 overflow-hidden rounded-2xl"
       onMouseMove={handleMouseMove}
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
+      data-aos="fade-up"
+      data-aos-duration="1000"
+      data-aos-delay={index * 150}
     >
       {/* Spotlight Gradient */}
       <motion.div
@@ -84,7 +85,7 @@ const SpotlightCard = ({ children, index }: { children: React.ReactNode; index: 
       <div className="relative h-full p-4 lg:p-6 flex flex-col items-center justify-between">
         {children}
       </div>
-    </motion.div>
+    </div>
   );
 };
 

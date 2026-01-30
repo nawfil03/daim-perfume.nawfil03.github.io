@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Instagram, ArrowUpRight, Facebook, Twitter, Linkedin } from "lucide-react";
+import { Instagram, ArrowUpRight, Mail } from "lucide-react";
 
 const Footer = () => {
   return (
@@ -20,29 +20,32 @@ const Footer = () => {
           {/* Brand Column */}
           <div className="lg:col-span-5 flex flex-col justify-between h-full">
             <div>
-              <motion.h2
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8 }}
+              <h2
+                data-aos="fade-up"
                 className="font-display text-5xl md:text-6xl text-white mb-6"
               >
                 DAIM
-              </motion.h2>
+              </h2>
               <p className="font-body text-white/60 font-light text-lg max-w-sm leading-relaxed mb-10">
                 Crafting olfactory masterpieces that transcend time. Luxury bottled for the modern connoisseur.
               </p>
             </div>
 
             <div className="flex gap-6">
-              {[Instagram, Facebook, Twitter, Linkedin].map((Icon, i) => (
-                <a
-                  key={i}
-                  href="#"
-                  className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 bg-white/5 hover:bg-primary hover:border-primary hover:text-black transition-all duration-300 group"
-                >
-                  <Icon size={18} className="text-white/70 group-hover:text-black transition-colors" />
-                </a>
-              ))}
+              {/* Instagram */}
+              {/* Instagram */}
+              <a
+                href="https://www.instagram.com/daim.intry?igsh=MWZxcTA0d3dkZzd5ZQ=="
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center rounded-full border border-white/10 bg-white/5 hover:bg-primary hover:border-primary hover:text-black transition-all duration-300 group"
+                aria-label="Instagram"
+              >
+                <Instagram size={18} className="text-white/70 group-hover:text-black transition-colors" />
+              </a>
+
+              {/* Email */}
+
             </div>
           </div>
 
@@ -55,7 +58,7 @@ const Footer = () => {
                 { label: "Our Story", href: "/#story" },
                 { label: "Craftsmanship", href: "/#craft" },
                 { label: "Journal", href: "#" },
-                { label: "Contact Us", href: "/contact" },
+                { label: "Contact Us", href: "/contact-us" },
               ].map((item, idx) => (
                 <li key={idx}>
                   <a href={item.href} className="text-white/60 hover:text-primary transition-colors duration-300 flex items-center gap-2 group">
